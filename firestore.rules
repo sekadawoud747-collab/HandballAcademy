@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function userPath(uid) { return /databases/$(database)/documents/users/$(uid); }
+    function ownerPath() { return /databases/$(database)/documents/meta/owner; }
+    function hasProfile() { return signedIn() && exists(userPath(request.auth.uid)); }
+    function profile() { return get(userPath(request.auth.uid)).data; }
+    function isManager() { return hasProfile() && profile().role == 'manager' && profile().active == true; }
+    function isActiveCoach() { return hasProfile() && profile().role == 'coach' && profile().active == true; }
+    function coachOwnsTeam(teamId) { return isActiveCoach() && profile().teamId == teamId; }
+
+    // Who set up the academy first. Only readable flag + one-time creation.
+    match /meta/owner {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid
+        && (isManager() || getAfter(userPath(request.auth.uid)).data.role == 'manager');
+      allow update, delete: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isManager());
+      // First-time setup: the very first account may make itself manager (only while no owner exists).
+      allow create: if isManager() || (
+        signedIn() && request.auth.uid == uid
+        && request.resource.data.role == 'manager' && request.resource.data.active == true
+        && !exists(ownerPath())
+        && getAfter(ownerPath()).data.uid == uid
+      );
+      allow update: if isManager() && request.auth.uid != uid;
+      allow delete: if isManager() && request.auth.uid != uid;
+    }
+    match /teams/{teamId} {
+      allow read: if isManager() || coachOwnsTeam(teamId);
+      allow create, update, delete: if isManager();
+    }
+    match /players/{playerId} {
+      allow read: if isManager() || (isActiveCoach() && resource.data.teamId == profile().teamId);
+      allow create, delete: if isManager();
+      allow update: if isManager() || (isActiveCoach() && resource.data.teamId == profile().teamId && request.resource.data.teamId == profile().teamId);
+    }
+    match /attendance/{attendanceId} {
+      allow read: if isManager() || (isActiveCoach() && resource.data.teamId == profile().teamId);
+      allow create: if isManager() || (isActiveCoach() && request.resource.data.teamId == profile().teamId);
+      allow update: if isManager() || (isActiveCoach() && resource.data.teamId == profile().teamId && request.resource.data.teamId == profile().teamId);
+      allow delete: if isManager() || (isActiveCoach() && resource.data.teamId == profile().teamId);
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

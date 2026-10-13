@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06152b">
+<title>Handball Academy Manager</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Handball">
+
+<style>
+:root{--navy:#102a43;--blue:#1f6feb;--pale:#eaf2f8;--bg:#f3f6fa;--ink:#142333;--muted:#64748b;--green:#16845b;--red:#c0392b;--amber:#a96500}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:700}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--navy);color:white}.secondary{background:var(--pale);color:var(--navy)}.danger{background:#feeceb;color:var(--red)}.success{background:#e4f6ee;color:var(--green)}.muted{color:var(--muted)}.small{font-size:12px}.appbar{background:var(--navy);color:white;padding:18px 16px 24px;border-radius:0 0 24px 24px}.brand{display:flex;align-items:center;gap:12px}.ball{width:52px;height:52px;flex-shrink:0;border-radius:16px;background:#fff;display:grid;place-items:center;color:var(--navy);font-size:30px}.appbar h1{font-size:18px;margin:0}.appbar p{font-size:12px;margin:4px 0 0;color:#d6e4f0}.appbar .topline{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:13px}.wrap{max-width:760px;margin:auto;padding:14px 14px 90px}.card{background:white;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 4px 18px #102a430c}.card h2{font-size:17px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{background:#f7f9fc;border:1px solid #edf1f5;border-radius:14px;padding:14px}.stat strong{display:block;font-size:25px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}.field label{font-size:13px;font-weight:700}.field input,.field select{width:100%;padding:12px;border:1px solid #d8e0e8;border-radius:11px;background:white;color:var(--ink)}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5eaf0;display:flex;justify-content:center;gap:4px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:5}.nav button{flex:1;max-width:150px;background:transparent;color:var(--muted);font-size:12px;padding:8px 3px}.nav button.active{background:var(--pale);color:var(--navy)}.player{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #edf1f5}.player:last-child{border-bottom:0}.avatar{width:38px;height:38px;border-radius:12px;background:var(--pale);display:grid;place-items:center;font-weight:800;color:var(--navy)}.playerinfo{flex:1;min-width:0}.playerinfo strong{display:block;font-size:14px}.playerinfo small{color:var(--muted)}.statusbtn{padding:8px 9px;font-size:12px;min-width:67px}.present{background:#e3f6ed;color:var(--green)}.absent{background:#ffebea;color:var(--red)}.excused{background:#fff2d9;color:var(--amber)}.pill{display:inline-block;border-radius:20px;padding:5px 9px;background:#edf2f7;font-size:11px;color:var(--navy)}.empty{text-align:center;padding:26px 10px;color:var(--muted)}.hidden{display:none!important}.notice{background:#fff5d9;border:1px solid #f5df9d;color:#795000;padding:11px 12px;border-radius:12px;font-size:12px;line-height:1.6}.login{max-width:430px;margin:28px auto;padding:0 16px}.login .card{padding:22px}.loginlogo{text-align:center;padding:18px 0}.loginlogo .ball{margin:0 auto 10px;width:72px;height:72px;font-size:42px}.loginlogo h1{font-size:21px;margin:0}.loginlogo p{margin:5px;color:var(--muted);font-size:13px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:10px}.sectionhead h2{margin:0}.reportrow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #edf1f5;font-size:13px}.reportrow:last-child{border:0}.toast{position:fixed;top:12px;left:12px;right:12px;z-index:20;background:#142333;color:white;border-radius:12px;padding:13px;text-align:center;box-shadow:0 8px 30px #0002}.foot{text-align:center;color:var(--muted);font-size:11px;margin-top:20px}
+@media(min-width:600px){.wrap{padding-top:22px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.appbar{padding-left:max(20px,calc((100% - 730px)/2));padding-right:max(20px,calc((100% - 730px)/2))}}
+
+/* Premium Handball Academy visual refresh */
+:root{--navy:#06152b;--blue:#168cff;--pale:#102d4d;--bg:#030b19;--ink:#eef5ff;--muted:#94a9c7;--green:#17d6a0;--red:#ff4f69;--amber:#ffb12b}
+html{background:#030b19}body{background:radial-gradient(ellipse at 15% 0%,#123e75 0,transparent 35%),radial-gradient(ellipse at 95% 16%,#74301f 0,transparent 29%),linear-gradient(160deg,#06152b 0%,#020817 62%,#071b32 100%);background-attachment:fixed;color:var(--ink);min-height:100vh}
+button{transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}button:active{transform:scale(.98)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #21a5ff;outline-offset:2px}
+.primary{background:linear-gradient(105deg,#ff3b72 0%,#ff6a21 52%,#ffbf19 100%);color:#08152b;box-shadow:0 7px 24px #ff632c30;font-weight:850}
+.secondary{background:linear-gradient(135deg,#123b68,#0a2140);color:#eaf4ff;border:1px solid #25507e}
+.danger{background:#40182b;color:#ff9eb0}.success{background:#0b3c39;color:#66f0cb}
+.appbar{position:relative;overflow:hidden;background:linear-gradient(112deg,#07172f 0%,#0b2b50 57%,#10213a 100%);border-radius:0 0 28px 28px;border-bottom:1px solid #1b5282;box-shadow:0 14px 35px #0004}
+.appbar:after{content:"";position:absolute;width:220px;height:220px;right:-70px;top:-110px;border:1px solid #2f8df355;border-radius:50%;box-shadow:0 0 0 24px #168cff0a,0 0 0 50px #168cff08;pointer-events:none}
+.brand,.topline{position:relative;z-index:1}.ball{background:linear-gradient(145deg,#168cff,#163f82 65%,#ff842b);color:white;border:1px solid #75c4ff70;box-shadow:0 0 25px #168cff45;border-radius:17px}
+.appbar h1{letter-spacing:.2px;font-weight:850}.appbar p{color:#a8c9ec}
+.wrap{padding-top:16px}
+.card{background:linear-gradient(145deg,#0b1c33f5,#071426f5);border:1px solid #193b60;box-shadow:0 10px 28px #0003,inset 0 1px #ffffff08;color:var(--ink);border-radius:20px}
+.card h2{color:#f3f7ff}.grid{gap:11px}
+.stat{background:linear-gradient(145deg,#102c4b,#0a1a30);border:1px solid #1e4c76;border-radius:17px;box-shadow:inset 0 1px #ffffff08}
+.stat strong{color:#53b7ff}.stat:nth-child(2) strong{color:#20dfb0}.stat:nth-child(3) strong{color:#ffb22d}.stat:nth-child(4) strong{color:#ff6f91}
+.field label{color:#c7d9f0}.field input,.field select{background:#06162b;color:#f0f6ff;border:1px solid #21476f;border-radius:13px;padding:13px}.field input::placeholder{color:#7188a8}.field input:focus,.field select:focus{border-color:#168cff;box-shadow:0 0 0 3px #168cff20;outline:0}
+.nav{background:#061329f5;backdrop-filter:blur(18px);border-top:1px solid #1b3d61;box-shadow:0 -8px 24px #0003}.nav button{color:#8099b9;border-radius:12px}.nav button.active{background:linear-gradient(135deg,#103b68,#13294a);color:#ffbd36;box-shadow:inset 0 0 0 1px #267ac0}
+.player{border-color:#18314f}.avatar{background:linear-gradient(145deg,#0f6fbd,#142b51);color:white;border:1px solid #2d8ee0}.pill{background:#102e4d;color:#a9d8ff;border:1px solid #22527e}
+.present{background:#0a3d39;color:#5cf0c6}.absent{background:#451c31;color:#ff9ab0}.excused{background:#49351a;color:#ffd17a}
+.notice{background:#332b1a;border-color:#74531f;color:#ffe1a1}.toast{background:#102b49;border:1px solid #2a6ca4;color:white;box-shadow:0 10px 35px #0008}
+.sectionhead h2{color:#f5f8ff}.reportrow{border-color:#19324f}.foot{color:#8299b8}
+.login{max-width:460px;margin:0 auto;padding:0 17px 34px}
+.login .card{padding:22px 20px 20px;border-radius:24px;background:linear-gradient(150deg,#07162bf5,#030b18f8);border:1px solid #1c426b;box-shadow:0 22px 55px #0007,0 0 35px #168cff0c}
+.loginlogo{position:relative;overflow:hidden;margin:0 -17px 18px;padding:26px 18px 22px;min-height:265px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;background:radial-gradient(ellipse at 18% 38%,#087eea55,transparent 40%),radial-gradient(ellipse at 90% 15%,#ff7b2450,transparent 36%),linear-gradient(155deg,#07172e,#0b2d4c 57%,#061225);border-bottom:1px solid #24517b;border-radius:0 0 30px 30px}
+.loginlogo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#020a1455 0%,#06152b20 40%,#020916e8 100%),url("handball_academy_icon.png") center 25%/min(58vw,225px) auto no-repeat;opacity:.98;pointer-events:none}
+.loginlogo:after{content:"";position:absolute;width:240px;height:240px;top:-135px;left:-80px;border:1px solid #4caaff55;border-radius:50%;box-shadow:0 0 0 20px #168cff0c,0 0 0 43px #168cff09}
+.loginlogo .ball{display:none}.loginlogo h1,.loginlogo p{position:relative;z-index:1}
+.loginlogo h1{font-size:25px;line-height:1.2;font-weight:950;letter-spacing:-.4px;color:#fff;text-shadow:0 3px 16px #000}
+.loginlogo h1 span{color:#ff9b28}.loginlogo p{color:#bad4f3!important;font-size:12px!important;letter-spacing:2.3px;text-transform:uppercase;margin-top:8px!important}
+.login .card h2{font-size:19px;margin-bottom:17px}
+.login .field{margin:13px 0}.login .field input{padding:15px 14px;background:#06162b;border-color:#1b3c61}
+.login .primary{padding:15px;border-radius:14px;font-size:15px;letter-spacing:.2px}
+.login .notice{border-radius:13px;font-size:11px;background:#111f34;border-color:#243d5d;color:#9bb8d9}
+.login .small.muted{color:#7f98b9;line-height:1.6}
+.login .foot{margin-top:15px}
+.appbar{padding-top:calc(18px + env(safe-area-inset-top))}.loginlogo{padding-top:calc(26px + env(safe-area-inset-top))}
+.field input,.field select,.login .field input{font-size:16px}
+.linkbtn{background:none;border:0;color:#ffb13b;font-weight:700;padding:8px;width:100%;font-size:13px;text-decoration:underline}
+@media(min-width:600px){.login{padding-top:20px}.loginlogo{border-radius:0 0 32px 32px}}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast hidden"></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDivjBuzpt5QmLJdphXkWMllc1khoHa8I8",
+  authDomain: "handball-academy-manager-fe8e4.firebaseapp.com",
+  projectId: "handball-academy-manager-fe8e4",
+  storageBucket: "handball-academy-manager-fe8e4.firebasestorage.app",
+  messagingSenderId: "142024172167",
+  appId: "1:142024172167:web:ae1e592810f87b09094e22",
+  measurementId: "G-VKM3WMPDJ3"
+};
+let fbApp, auth, store, cloudReady=false, unsubs=[], ownerExists=null, settingUp=false, loginMode='login';
+try {
+  fbApp=firebase.initializeApp(FIREBASE_CONFIG); auth=firebase.auth(); store=firebase.firestore();
+  // حفظ نسخة محلية من Firestore: الحضور يتسجل حتى لو النت فصل في الملعب ويتزامن لما يرجع
+  store.enablePersistence({synchronizeTabs:true}).catch(e=>console.warn('Offline persistence unavailable',e&&e.code));
+  cloudReady=true;
+} catch(e) { console.error('Firebase init failed',e); }
+const KEY='ham_v3_cache';
+const emptyDB=()=>({teams:[],coaches:[],players:[],attendance:{}});
+let db=emptyDB(), session=null, authChecked=!cloudReady, tab='home', chosenTeam='', chosenDate=today(), busy=false;
+let repFrom=monthStart(), repTo=today(), repTeam='';
+try{localStorage.removeItem('ham_v2_data');localStorage.removeItem('ham_v2_session')}catch(e){}
+function cacheDB(){try{if(session)localStorage.setItem(KEY+'_'+session.uid,JSON.stringify(db))}catch(e){}}
+function loadCache(uid){try{const d=JSON.parse(localStorage.getItem(KEY+'_'+uid));return d&&d.teams?d:emptyDB()}catch(e){return emptyDB()}}
+function today(){return new Date().toLocaleDateString('en-CA')}
+function monthStart(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),1).toLocaleDateString('en-CA')}
+function id(){return store?store.collection('_').doc().id:Math.random().toString(36).slice(2,12)}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function teamById(tid){return db.teams.find(t=>t.id===tid)}
+function visibleTeams(){return session?.role==='manager'?db.teams:db.teams.filter(t=>t.id===session?.teamId)}
+function visiblePlayers(tid){return db.players.filter(p=>p.teamId===tid).sort((a,b)=>(Number(a.number)||999)-(Number(b.number)||999)||a.name.localeCompare(b.name,'ar'))}
+function myPlayers(){return session?.role==='manager'?db.players:db.players.filter(p=>p.teamId===session?.teamId)}
+function attKey(date,pid){return date+'_'+pid}
+function parseKey(key){const i=key.indexOf('_');return {date:key.slice(0,i),playerId:key.slice(i+1)}}
+let toastTimer;function toast(msg){let el=document.getElementById('toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),2600)}
+function cloudErr(e,fallback){console.error(e);const c=e&&e.code||'';if(c.includes('permission-denied'))return toast('مفيش صلاحية للعملية دي');toast(fallback)}
+
+/* ---------- الدخول والجلسة ---------- */
+async function login(){
+ if(!cloudReady){toast('الاتصال بـ Firebase فشل. تأكد من الإنترنت وافتح التطبيق تاني.');return}
+ const email=String(document.getElementById('email').value||'').trim(), password=document.getElementById('password').value;
+ if(!email||!password){toast('اكتب البريد الإلكتروني وكلمة المرور');return}
+ if(busy)return; busy=true; setLoginBusy(true);
+ try { await auth.signInWithEmailAndPassword(email,password); }
+ catch(e){console.error(e);toast(firebaseError(e));}
+ finally{busy=false;setLoginBusy(false)}
+}
+function setLoginBusy(on){const b=document.getElementById('loginBtn');if(b){b.disabled=on;b.textContent=on?'لحظة...':(loginMode==='setup'?'إنشاء حساب المدير':'Login · دخول')}}
+function firebaseError(e){const c=e&&e.code||'';if(c.includes('wrong-password')||c.includes('invalid-credential')||c.includes('user-not-found')||c.includes('invalid-email'))return 'البريد الإلكتروني أو كلمة المرور غير صحيحة';if(c.includes('network'))return 'مفيش اتصال بالإنترنت';if(c.includes('too-many-requests'))return 'محاولات كثيرة. استنى شوية وجرب تاني';if(c.includes('user-disabled'))return 'الحساب ده موقوف';return 'تعذر تسجيل الدخول: '+(e&&e.message?e.message:c)}
+async function onAuth(user){
+ if(settingUp)return;
+ stopCloudSync();
+ if(!user){session=null;db=emptyDB();authChecked=true;render();return}
+ try{
+   const snap=await store.collection('users').doc(user.uid).get();
+   if(!snap.exists){await auth.signOut();toast('الحساب موجود لكن المدير لم يحدد صلاحياته بعد.');return}
+   const profile=snap.data();
+   if(profile.active!==true||!['manager','coach'].includes(profile.role)){await auth.signOut();toast('الحساب موقوف أو صلاحياته غير صحيحة');return}
+   if(profile.role==='coach'&&!profile.teamId){await auth.signOut();toast('الكابتن ده مش مربوط بفريق. كلّم المدير.');return}
+   session={uid:user.uid,name:profile.name||user.email,role:profile.role,teamId:profile.teamId||'',email:user.email};
+   db=loadCache(user.uid); tab='home'; authChecked=true;
+   if(profile.role==='manager'&&ownerExists!==true){store.collection('meta').doc('owner').set({uid:user.uid}).then(()=>ownerExists=true).catch(()=>{})}
+   startCloudSync(); render();
+ }catch(e){console.error(e);authChecked=true;toast('تعذر قراءة صلاحيات الحساب. تأكد من الإنترنت.');render()}
+}
+async function logout(){loginMode='login';stopCloudSync();if(auth){try{await auth.signOut()}catch(e){}}session=null;db=emptyDB();render()}
+
+async function checkOwner(){if(!cloudReady)return;try{const d=await store.collection('meta').doc('owner').get();ownerExists=d.exists}catch(e){ownerExists=null}if(!session)render()}
+async function setupManager(){
+ const name=document.getElementById('setupName').value.trim(),email=document.getElementById('email').value.trim(),password=document.getElementById('password').value;
+ if(!name||!email||password.length<6)return toast('اكتب الاسم والبريد وكلمة مرور 6 أحرف على الأقل');
+ if(busy)return;busy=true;settingUp=true;setLoginBusy(true);
+ try{const cred=await auth.createUserWithEmailAndPassword(email,password);const uid=cred.user.uid;
+  const b=store.batch();b.set(store.collection('users').doc(uid),{role:'manager',active:true,name,email});b.set(store.collection('meta').doc('owner'),{uid});
+  try{await b.commit()}catch(e){await cred.user.delete().catch(()=>auth.signOut());throw Object.assign(new Error('owner'),{code:'owner-exists'})}
+  ownerExists=true;settingUp=false;loginMode='login';toast('تم إنشاء حساب المدير ✓');await onAuth(cred.user);
+ }catch(e){console.error(e);settingUp=false;const c=e&&e.code||'';toast(c==='owner-exists'?'فيه مدير متسجل بالفعل. ادخل بحسابه.':c.includes('email-already-in-use')?'البريد ده متسجل؛ استخدم "دخول"':c.includes('weak-password')?'كلمة المرور ضعيفة':firebaseError(e))}
+ finally{busy=false;settingUp=false;setLoginBusy(false)}
+}
+/* ---------- المزامنة اللحظية (قراءة) ---------- */
+function startCloudSync(){
+ stopCloudSync(); if(!session||!cloudReady)return;
+ const isM=session.role==='manager', uid=session.uid, tid=session.teamId;
+ const fail=(col)=>err=>{console.error(col,err);toast('مشكلة في قراءة '+col+'؛ راجع صلاحيات Firestore')};
+ const listen=(ref,col,handler)=>unsubs.push(ref.onSnapshot(snap=>{if(!session||session.uid!==uid)return;handler(snap);changed()},fail(col)));
+ if(isM) listen(store.collection('teams'),'الفرق',s=>{db.teams=s.docs.map(d=>({id:d.id,...d.data()}))});
+ else listen(store.collection('teams').doc(tid),'الفريق',d=>{db.teams=d.exists?[{id:d.id,...d.data()}]:[]});
+ listen(isM?store.collection('players'):store.collection('players').where('teamId','==',tid),'اللاعبين',s=>{db.players=s.docs.map(d=>({id:d.id,...d.data()}))});
+ listen(isM?store.collection('attendance'):store.collection('attendance').where('teamId','==',tid),'الحضور',s=>{const a={};s.docs.forEach(d=>{const x=d.data();a[attKey(x.date,x.playerId)]={status:x.status,teamId:x.teamId}});db.attendance=a});
+ if(isM) listen(store.collection('users').where('role','==','coach'),'الكباتن',s=>{db.coaches=s.docs.filter(d=>d.data().active!==false).map(d=>({id:d.id,name:d.data().name||'',email:d.data().email||'',phone:d.data().phone||'',teamId:d.data().teamId||''}))});
+}
+let renderTimer;function changed(){cacheDB();clearTimeout(renderTimer);renderTimer=setTimeout(()=>{if(!isTyping())render()},60)}
+function isTyping(){const a=document.activeElement;return a&&(a.tagName==='INPUT'&&a.type!=='date'&&a.type!=='file'&&a.value)}
+function stopCloudSync(){unsubs.forEach(fn=>{try{fn()}catch(e){}});unsubs=[]}
+
+/* ---------- الكتابة: كل عملية تكتب المستند اللي اتغير بس ---------- */
+async function commitInChunks(ops){for(let i=0;i<ops.length;i+=400){const b=store.batch();ops.slice(i,i+400).forEach(fn=>fn(b));await b.commit()}}
+function attDoc(date,pid){return store.collection('attendance').doc(attKey(date,pid))}
+function setStatus(pid,status){
+ const k=attKey(chosenDate,pid), cur=db.attendance[k]?.status;
+ if(cur===status){delete db.attendance[k];render();attDoc(chosenDate,pid).delete().catch(e=>cloudErr(e,'لم يتم مسح الحالة من السحابة'));return}
+ db.attendance[k]={status,teamId:chosenTeam};render();
+ attDoc(chosenDate,pid).set({date:chosenDate,playerId:pid,teamId:chosenTeam,status,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:session.uid}).catch(e=>cloudErr(e,'لم يتم حفظ الحالة؛ راجع الاتصال'));
+}
+async function markAll(s){
+ const ps=visiblePlayers(chosenTeam);if(!ps.length)return;
+ ps.forEach(p=>db.attendance[attKey(chosenDate,p.id)]={status:s,teamId:chosenTeam});render();
+ try{await commitInChunks(ps.map(p=>b=>b.set(attDoc(chosenDate,p.id),{date:chosenDate,playerId:p.id,teamId:chosenTeam,status:s,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:session.uid})));toast('تم تحديد الكل حاضر')}catch(e){cloudErr(e,'لم يتم حفظ الحالات؛ راجع الاتصال')}
+}
+async function clearDay(){
+ if(!confirm('تمسح حالات الحضور لهذا الفريق والتاريخ؟'))return;
+ const ps=visiblePlayers(chosenTeam).filter(p=>db.attendance[attKey(chosenDate,p.id)]);
+ ps.forEach(p=>delete db.attendance[attKey(chosenDate,p.id)]);render();
+ try{await commitInChunks(ps.map(p=>b=>b.delete(attDoc(chosenDate,p.id))));toast('تم مسح الحالات')}catch(e){cloudErr(e,'لم يتم مسح كل الحالات من السحابة')}
+}
+function saveAttendance(){const ps=visiblePlayers(chosenTeam),missing=ps.filter(p=>!db.attendance[attKey(chosenDate,p.id)]).length;toast(missing?`تم الحفظ · فاضل ${missing} لاعب من غير حالة`:'تم حفظ الحضور ✓')}
+async function addTeam(){let name=document.getElementById('newTeamName').value.trim();if(!name)return toast('اكتب اسم الفريق');if(db.teams.some(t=>t.name===name))return toast('فيه فريق بنفس الاسم');const tid=id();try{document.getElementById('newTeamName').value='';await store.collection('teams').doc(tid).set({name,coachId:''});toast('تمت إضافة الفريق')}catch(e){cloudErr(e,'تعذر إضافة الفريق')}}
+async function renameTeam(tid){const t=teamById(tid);const name=(prompt('اسم الفريق الجديد',t?.name||'')||'').trim();if(!name||name===t?.name)return;try{await store.collection('teams').doc(tid).update({name});toast('تم تعديل الاسم')}catch(e){cloudErr(e,'تعذر تعديل الاسم')}}
+async function deleteTeam(tid){const t=teamById(tid);if(visiblePlayers(tid).length)return toast('انقل أو احذف لاعبين الفريق الأول');if(db.coaches.some(c=>c.teamId===tid))return toast('فيه كابتن مربوط بالفريق ده. احذف حسابه الأول');if(!confirm('تحذف فريق "'+(t?.name||'')+'"؟'))return;try{await store.collection('teams').doc(tid).delete();toast('تم حذف الفريق')}catch(e){cloudErr(e,'تعذر حذف الفريق')}}
+async function addPlayer(){let name=document.getElementById('playerName').value.trim(),teamId=document.getElementById('playerTeam').value,number=document.getElementById('playerNumber').value.trim();if(!name||!teamId)return toast('اكتب اسم اللاعب واختار الفريق');try{document.getElementById('playerName').value='';document.getElementById('playerNumber').value='';await store.collection('players').doc(id()).set({name,teamId,number});toast('تمت إضافة اللاعب')}catch(e){cloudErr(e,'تعذر إضافة اللاعب')}}
+async function editPlayer(pid){const p=db.players.find(x=>x.id===pid);if(!p)return;const name=(prompt('اسم اللاعب',p.name)||'').trim();if(!name)return;const number=(prompt('رقم القميص (اختياري)',p.number||'')??p.number??'').trim();try{await store.collection('players').doc(pid).update({name,number});toast('تم تعديل بيانات اللاعب')}catch(e){cloudErr(e,'تعذر تعديل اللاعب')}}
+async function movePlayer(pid,teamId){const p=db.players.find(x=>x.id===pid);if(!p||p.teamId===teamId)return;try{await store.collection('players').doc(pid).update({teamId});toast('تم نقل اللاعب')}catch(e){cloudErr(e,'تعذر نقل اللاعب')}}
+async function deletePlayer(pid){const p=db.players.find(x=>x.id===pid);if(!confirm('تحذف اللاعب "'+(p?.name||'')+'"؟ سجل حضوره القديم هيفضل محفوظ لكن مش هيظهر في التقارير.'))return;try{await store.collection('players').doc(pid).delete();toast('تم حذف اللاعب')}catch(e){cloudErr(e,'تعذر حذف اللاعب')}}
+async function addCoach(){let name=document.getElementById('coachName').value.trim(),email=document.getElementById('coachEmail').value.trim().toLowerCase(),password=document.getElementById('coachPassword').value,phone=document.getElementById('coachPhone').value.trim(),teamId=document.getElementById('coachTeam').value;if(!name||!email||password.length<6||!teamId)return toast('اكتب الاسم والبريد وكلمة مرور 6 أحرف على الأقل واختار الفريق');if(busy)return;busy=true;toast('جاري إنشاء الحساب...');
+ let sec;try{sec=firebase.apps.find(a=>a.name==='coachMaker')||firebase.initializeApp(FIREBASE_CONFIG,'coachMaker');const cred=await sec.auth().createUserWithEmailAndPassword(email,password);const uid=cred.user.uid;await sec.auth().signOut();
+  const b=store.batch();b.set(store.collection('users').doc(uid),{role:'coach',active:true,name,email,phone,teamId,createdAt:firebase.firestore.FieldValue.serverTimestamp(),createdBy:session.uid});b.set(store.collection('teams').doc(teamId),{coachId:uid},{merge:true});await b.commit();
+  ['coachName','coachEmail','coachPassword','coachPhone'].forEach(i=>document.getElementById(i).value='');toast('تم إنشاء حساب الكابتن. يدخل بالبريد وكلمة المرور دي.')}
+ catch(e){console.error(e);const c=e&&e.code||'';toast(c.includes('email-already-in-use')?'البريد ده مستخدم قبل كده. استخدم بريد تاني':c.includes('invalid-email')?'البريد مكتوب غلط':c.includes('weak-password')?'كلمة المرور ضعيفة':c.includes('permission')?'مفيش صلاحية؛ راجع قواعد Firestore':'تعذر إنشاء الحساب')}finally{busy=false}}
+async function deleteCoach(cid){if(!confirm('توقف حساب الكابتن؟ مش هيقدر يدخل تاني.'))return;try{const b=store.batch();b.set(store.collection('users').doc(cid),{active:false,teamId:''},{merge:true});db.teams.filter(t=>t.coachId===cid).forEach(t=>b.set(store.collection('teams').doc(t.id),{coachId:''},{merge:true}));await b.commit();toast('تم إيقاف حساب الكابتن')}catch(e){cloudErr(e,'تعذر إيقاف الحساب')}}
+
+/* ---------- الواجهة ---------- */
+function render(){const root=document.getElementById('app');
+if(!authChecked){root.innerHTML=`<div class="login"><div class="loginlogo"><h1>Handball <span>Academy</span></h1><p>جاري التحميل...</p></div></div>`;return}
+if(!session){const setup=loginMode==='setup';root.innerHTML=`<div class="login"><div class="loginlogo"><div class="ball">🤾</div><h1>Handball <span>Academy</span></h1><p>MANAGER · TRAIN · BUILD CHAMPIONS</p></div><div class="card"><h2>${setup?'إعداد أول مرة <span style="color:#ff9b28">/</span> حساب المدير':'Welcome Back <span style="color:#ff9b28">/</span> تسجيل الدخول'}</h2><form onsubmit="event.preventDefault();${setup?'setupManager()':'login()'}">${setup?'<div class="field"><label>اسم المدير</label><input id="setupName" placeholder="مثال: مدير الأكاديمية"></div>':''}<div class="field"><label>البريد الإلكتروني</label><input id="email" type="email" autocomplete="username" placeholder="name@example.com" dir="ltr"></div><div class="field"><label>كلمة المرور</label><input id="password" type="password" autocomplete="${setup?'new-password':'current-password'}" placeholder="${setup?'6 أحرف على الأقل':'كلمة المرور'}" dir="ltr"></div><button id="loginBtn" type="submit" class="primary" style="width:100%">${setup?'إنشاء حساب المدير':'Login · دخول'}</button></form>${setup?'<button class="linkbtn" onclick="loginMode=\'login\';render()">رجوع لتسجيل الدخول</button>':(ownerExists===false?'<button class="linkbtn" onclick="loginMode=\'setup\';render()">أول مرة؟ إنشاء حساب المدير</button>':'')}${cloudReady?'':'<div class="notice" style="margin-top:14px">مفيش اتصال بالإنترنت. اتصل وافتح التطبيق تاني.</div>'}<p class="small muted">Better Coaches · Stronger Teams · Brighter Future</p></div><p class="foot">HANDBALL ACADEMY MANAGER · OFFICIAL APP</p></div>`;return}
+const isManager=session.role==='manager';const teams=visibleTeams();if(!chosenTeam||!teams.some(t=>t.id===chosenTeam))chosenTeam=teams[0]?.id||'';
+if(!isManager&&tab==='teams')tab='home';
+const nb=(k,ic,l)=>`<button class="${tab===k?'active':''}" onclick="go('${k}')">${ic}<br>${l}</button>`;
+root.innerHTML=`<header class="appbar"><div class="brand"><div class="ball">🤾</div><div><h1>Handball Academy Manager</h1><p>إدارة أكاديمية كرة اليد</p></div></div><div class="topline"><span>${esc(session.name)} · ${isManager?'مدير الأكاديمية':'كابتن '+esc(teams[0]?.name||'الفريق')}</span><button class="secondary" style="padding:7px 10px;font-size:12px" onclick="if(confirm('تسجيل خروج؟'))logout()">خروج</button></div></header><main class="wrap">${tab==='home'?homePage(teams,isManager):tab==='attendance'?attendancePage(teams):tab==='teams'?teamsPage():tab==='reports'?reportsPage(teams,isManager):settingsPage(isManager)}</main><nav class="nav">${nb('home','🏠','الرئيسية')}${nb('attendance','✅','الحضور')}${isManager?nb('teams','👥','الفرق'):''}${nb('reports','📊','التقارير')}${nb('settings','⚙️','الإعدادات')}</nav>`;
+}
+function go(t){tab=t;render();window.scrollTo(0,0)}
+// زرار الرجوع في أندرويد: يرجع للرئيسية بدل ما يقفل التطبيق
+function handleBack(){if(session&&tab!=='home'){go('home');return true}return false}
+function homePage(teams,isManager){let todayKey=today();let allPlayers=myPlayers();let statuses=allPlayers.map(p=>db.attendance[attKey(todayKey,p.id)]?.status);let present=statuses.filter(s=>s==='present').length,absent=statuses.filter(s=>s==='absent').length,excused=statuses.filter(s=>s==='excused').length;return `<div class="grid"><div class="stat"><strong>${teams.length}</strong><span>${isManager?'عدد الفرق':'فريقك'}</span></div><div class="stat"><strong>${allPlayers.length}</strong><span>إجمالي اللاعبين</span></div><div class="stat"><strong>${present}</strong><span>حاضر اليوم</span></div><div class="stat"><strong>${absent}</strong><span>غائب اليوم</span></div></div><div class="card"><div class="sectionhead"><h2>تسجيل الحضور</h2><span class="pill">${esc(todayKey)}</span></div><p class="muted small">اختار الفريق وسجّل حالة كل لاعب في ثواني.</p>${teams.length?`<div class="field"><label>الفريق</label><select onchange="chosenTeam=this.value;render()">${teams.map(t=>`<option value="${t.id}" ${t.id===chosenTeam?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div><button class="primary" style="width:100%" onclick="chosenDate=today();go('attendance')">فتح سجل الحضور</button>`:`<div class="empty">${isManager?'ابدأ بإضافة فريق من صفحة الفرق':'جاري تحميل بيانات فريقك...'}</div>`}</div><div class="card"><h2>ملخص اليوم</h2><div class="reportrow"><span>حاضر</span><strong style="color:var(--green)">${present}</strong></div><div class="reportrow"><span>غائب</span><strong style="color:var(--red)">${absent}</strong></div><div class="reportrow"><span>معتذر</span><strong style="color:var(--amber)">${excused}</strong></div><div class="reportrow"><span>لم يتم تحديد الحالة</span><strong>${statuses.filter(s=>!s).length}</strong></div></div>`}
+function attendancePage(teams){if(!teams.length)return `<div class="card empty">مفيش فريق مخصص للحساب ده.</div>`;let team=teamById(chosenTeam)||teams[0];chosenTeam=team.id;let players=visiblePlayers(team.id);let done=players.filter(p=>db.attendance[attKey(chosenDate,p.id)]).length;return `<div class="card"><div class="sectionhead"><h2>سجل الحضور</h2><span class="pill">${done}/${players.length} لاعب</span></div>${teams.length>1?`<div class="field"><label>الفريق</label><select onchange="chosenTeam=this.value;render()">${teams.map(t=>`<option value="${t.id}" ${t.id===team.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>`:''}<div class="field"><label>تاريخ التمرين</label><input type="date" value="${chosenDate}" max="${today()}" onchange="chosenDate=this.value||today();render()"></div><div class="row"><button class="secondary" onclick="markAll('present')">الكل حاضر</button><button class="secondary" onclick="clearDay()">مسح الحالات</button></div>${players.length?players.map((p,i)=>{let s=db.attendance[attKey(chosenDate,p.id)]?.status;return `<div class="player"><div class="avatar">${esc(p.number||String(i+1))}</div><div class="playerinfo"><strong>${esc(p.name)}</strong><small>${s==='present'?'حاضر':s==='absent'?'غائب':s==='excused'?'معتذر':'لم تُحدد الحالة'}</small></div><button class="statusbtn ${s==='present'?'present':''}" onclick="setStatus('${p.id}','present')">حاضر</button><button class="statusbtn ${s==='absent'?'absent':''}" onclick="setStatus('${p.id}','absent')">غائب</button><button class="statusbtn ${s==='excused'?'excused':''}" onclick="setStatus('${p.id}','excused')">معتذر</button></div>`}).join(''):`<div class="empty">مفيش لاعبين في الفريق ده. المدير يقدر يضيفهم من صفحة الفرق.</div>`}<button class="primary" style="width:100%;margin-top:14px" onclick="saveAttendance()">حفظ الحضور</button><p class="small muted" style="text-align:center">كل ضغطة بتتحفظ تلقائيًا · اضغط على نفس الحالة تاني لإلغائها</p></div>`}
+function teamOptions(sel){return db.teams.map(t=>`<option value="${t.id}" ${t.id===sel?'selected':''}>${esc(t.name)}</option>`).join('')}
+function teamsPage(){const sel=teamById(chosenTeam)?chosenTeam:(db.teams[0]?.id||'');const players=sel?visiblePlayers(sel):[];return `<div class="card"><h2>إضافة فريق</h2><div class="field"><label>اسم الفريق الجديد</label><input id="newTeamName" placeholder="مثال: مواليد 2016 بنين"></div><button class="primary" onclick="addTeam()">إضافة فريق</button></div><div class="card"><h2>الفرق الحالية</h2>${db.teams.map(t=>`<div class="reportrow" style="align-items:center"><div style="flex:1"><strong>${esc(t.name)}</strong><div class="small muted">${visiblePlayers(t.id).length} لاعب · ${esc(db.coaches.find(c=>c.teamId===t.id)?.name||'بدون كابتن')}</div></div><button class="secondary" style="padding:8px 10px;font-size:12px" onclick="renameTeam('${t.id}')">تعديل</button><button class="danger" style="padding:8px 10px;font-size:12px" onclick="deleteTeam('${t.id}')">حذف</button></div>`).join('')||'<div class="empty">لسه مفيش فرق</div>'}</div>${db.teams.length?`<div class="card"><h2>إضافة لاعب</h2><div class="field"><label>الفريق</label><select id="playerTeam">${teamOptions(sel)}</select></div><div class="field"><label>اسم اللاعب</label><input id="playerName" placeholder="الاسم بالكامل"></div><div class="field"><label>رقم اللاعب (اختياري)</label><input id="playerNumber" inputmode="numeric" placeholder="رقم القميص"></div><button class="primary" onclick="addPlayer()">حفظ اللاعب</button></div><div class="card"><div class="sectionhead"><h2>لاعبين الفريق</h2><span class="pill">${players.length}</span></div><div class="field"><select onchange="chosenTeam=this.value;render()">${teamOptions(sel)}</select></div>${players.map(p=>`<div class="player"><div class="avatar">${esc(p.number||'-')}</div><div class="playerinfo"><strong>${esc(p.name)}</strong><select style="margin-top:4px;padding:4px;border-radius:8px;background:#06162b;color:#cfe3ff;border:1px solid #21476f;font-size:11px" onchange="movePlayer('${p.id}',this.value)">${teamOptions(p.teamId)}</select></div><button class="secondary statusbtn" onclick="editPlayer('${p.id}')">تعديل</button><button class="danger statusbtn" onclick="deletePlayer('${p.id}')">حذف</button></div>`).join('')||'<div class="empty">مفيش لاعبين في الفريق ده</div>'}</div><div class="card"><h2>حسابات الكباتن</h2><div class="field"><label>اسم الكابتن</label><input id="coachName" placeholder="اسم الكابتن"></div><div class="field"><label>البريد الإلكتروني للدخول</label><input id="coachEmail" type="email" dir="ltr" placeholder="coach@example.com"></div><div class="field"><label>رقم الموبايل (اختياري)</label><input id="coachPhone" inputmode="tel" placeholder="رقم الموبايل"></div><div class="field"><label>كلمة مرور مؤقتة</label><input id="coachPassword" dir="ltr" placeholder="6 أحرف أو أرقام على الأقل"></div><div class="field"><label>الفريق المسؤول عنه</label><select id="coachTeam">${teamOptions(sel)}</select></div><button class="primary" onclick="addCoach()">إنشاء حساب كابتن</button>${db.coaches.map(c=>`<div class="reportrow"><span>${esc(c.name)}<br><small class="muted" dir="ltr">${esc(c.email)}</small><br><small class="muted">${esc(c.phone)}${c.phone?' · ':''}${esc(teamById(c.teamId)?.name||'بدون فريق')}</small></span><button class="danger" onclick="deleteCoach('${c.id}')">إيقاف</button></div>`).join('')}</div>`:''}`}
+function reportData(isManager){let players=myPlayers();if(isManager&&repTeam)players=players.filter(p=>p.teamId===repTeam);const pids=new Set(players.map(p=>p.id));const stats={};players.forEach(p=>stats[p.id]={present:0,absent:0,excused:0});const records=[];Object.entries(db.attendance).forEach(([k,v])=>{const {date,playerId}=parseKey(k);if(!pids.has(playerId)||date<repFrom||date>repTo)return;if(stats[playerId][v.status]!==undefined)stats[playerId][v.status]++;records.push({date,playerId,status:v.status})});return {players,stats,records}}
+function reportsPage(teams,isManager){const {players,stats,records}=reportData(isManager);const days=new Set(records.map(r=>r.date)).size;const pres=records.filter(r=>r.status==='present').length;const rows=players.map(p=>{const s=stats[p.id],n=s.present+s.absent+s.excused,pct=n?Math.round(s.present/n*100):0;return {p,s,n,pct}}).sort((a,b)=>b.pct-a.pct||b.n-a.n).map(({p,s,n,pct})=>`<div class="reportrow"><div><strong>${esc(p.name)}</strong>${isManager&&!repTeam?`<div class="small muted">${esc(teamById(p.teamId)?.name||'')}</div>`:''}<div class="small">حاضر ${s.present} · غائب ${s.absent} · معتذر ${s.excused}</div></div><strong style="color:${!n?'var(--muted)':pct>=75?'var(--green)':pct>=50?'var(--amber)':'var(--red)'}">${n?pct+'%':'—'}</strong></div>`);return `<div class="card"><h2>تقارير الحضور</h2><div class="row"><div class="field"><label>من</label><input type="date" value="${repFrom}" onchange="repFrom=this.value||monthStart();render()"></div><div class="field"><label>إلى</label><input type="date" value="${repTo}" onchange="repTo=this.value||today();render()"></div></div>${isManager?`<div class="field"><label>الفريق</label><select onchange="repTeam=this.value;render()"><option value="">كل الفرق</option>${teams.map(t=>`<option value="${t.id}" ${t.id===repTeam?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>`:''}<div class="grid"><div class="stat"><strong>${players.length}</strong><span>لاعب</span></div><div class="stat"><strong>${days}</strong><span>يوم تمرين</span></div><div class="stat"><strong>${records.length?Math.round(pres/records.length*100):0}%</strong><span>نسبة الحضور</span></div><div class="stat"><strong>${records.length}</strong><span>سجلات</span></div></div>${rows.join('')||'<div class="empty">لا توجد بيانات في الفترة دي</div>'}<button class="primary" style="width:100%;margin-top:12px" onclick="exportCSV()">تصدير التقرير CSV</button></div>`}
+function settingsPage(isManager){return `<div class="card"><h2>الحساب</h2><div class="reportrow"><span>الاسم</span><strong>${esc(session.name)}</strong></div><div class="reportrow"><span>البريد</span><strong dir="ltr">${esc(session.email||'')}</strong></div><button class="secondary" style="width:100%;margin-top:10px" onclick="changePassword()">تغيير كلمة المرور</button></div>${isManager?`<div class="card"><h2>النسخ الاحتياطي</h2><p class="muted small">نزّل نسخة من الفرق واللاعبين والحضور، أو استرجع نسخة قديمة (الاسترجاع بيضيف/يحدّث البيانات ومش بيمسح الموجود).</p><button class="primary" style="width:100%" onclick="backup()">تنزيل نسخة احتياطية</button><div class="field"><label>استرجاع نسخة JSON</label><input type="file" id="restoreFile" accept=".json,application/json"></div><button class="secondary" style="width:100%" onclick="restore()">استرجاع البيانات</button></div>`:''}<div class="notice">البيانات بتتزامن عبر Firebase. لو النت فصل أثناء تسجيل الحضور، التسجيل بيتحفظ على الموبايل ويترفع أول ما النت يرجع.</div><p class="foot">Handball Academy Manager · إصدار 2.0 · ويب</p>`}
+async function changePassword(){const p=prompt('اكتب كلمة المرور الجديدة (6 أحرف على الأقل)');if(p===null)return;if(p.length<6)return toast('كلمة المرور لازم تكون 6 أحرف على الأقل');try{await auth.currentUser.updatePassword(p);toast('تم تغيير كلمة المرور')}catch(e){console.error(e);toast(String(e.code||'').includes('requires-recent-login')?'لازم تسجل خروج وتدخل تاني قبل تغيير كلمة المرور':'تعذر تغيير كلمة المرور')}}
+function backup(){const data={version:3,exportedAt:new Date().toISOString(),teams:db.teams,players:db.players,attendance:db.attendance};download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'handball-backup-'+today()+'.json')}
+function restore(){let f=document.getElementById('restoreFile').files[0];if(!f)return toast('اختار ملف النسخة الاحتياطية');let r=new FileReader();r.onload=async()=>{let x;try{x=JSON.parse(r.result);if(!Array.isArray(x.teams)||!Array.isArray(x.players)||typeof x.attendance!=='object')throw 0}catch(e){return toast('الملف غير صالح')}
+ if(!confirm(`استرجاع ${x.teams.length} فريق و${x.players.length} لاعب و${Object.keys(x.attendance).length} سجل حضور؟`))return;
+ const ops=[];x.teams.forEach(t=>{if(!t.id)return;ops.push(b=>b.set(store.collection('teams').doc(t.id),{name:String(t.name||'')},{merge:true}))});
+ x.players.forEach(p=>{if(!p.id)return;ops.push(b=>b.set(store.collection('players').doc(p.id),{name:String(p.name||''),teamId:String(p.teamId||''),number:String(p.number||'')},{merge:true}))});
+ Object.entries(x.attendance).forEach(([k,v])=>{const {date,playerId}=parseKey(k);if(!date||!playerId||!v||!v.status)return;const p=x.players.find(q=>q.id===playerId);ops.push(b=>b.set(store.collection('attendance').doc(k),{date,playerId,teamId:v.teamId||p?.teamId||'',status:v.status,updatedAt:firebase.firestore.FieldValue.serverTimestamp(),updatedBy:session.uid},{merge:true}))});
+ toast('جاري الاسترجاع...');try{await commitInChunks(ops);toast('تم استرجاع النسخة')}catch(e){cloudErr(e,'الاسترجاع ماكملش؛ جرّب تاني')}};r.readAsText(f)}
+function exportCSV(){const isM=session.role==='manager';const {records}=reportData(isM);let lines=[['اللاعب','رقم القميص','الفريق','التاريخ','الحالة']];records.sort((a,b)=>a.date.localeCompare(b.date)).forEach(r=>{const p=db.players.find(x=>x.id===r.playerId);lines.push([p.name,p.number||'',teamById(p.teamId)?.name||'',r.date,r.status==='present'?'حاضر':r.status==='absent'?'غائب':'معتذر'])});if(lines.length===1)return toast('مفيش بيانات في الفترة دي');let csv='﻿'+lines.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),`attendance-${repFrom}_${repTo}.csv`)}
+function isIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+async function download(blob,name){if(isIOS()&&navigator.canShare){try{const f=new File([blob],name,{type:blob.type});if(navigator.canShare({files:[f]})){await navigator.share({files:[f],title:name});return}}catch(e){if(e&&e.name==='AbortError')return}}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+
+render();
+if(cloudReady){checkOwner();auth.onAuthStateChanged(onAuth)}
+</script>
+</body>
+</html>
